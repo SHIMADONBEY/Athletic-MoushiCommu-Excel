@@ -217,15 +217,32 @@ Private Function WriteEntryToEntryListSheet( _
         .Cells(1, EntryListColumn.TeamPhonetic).Value           = ""
 
         .Cells(1, EntryListColumn.Region).Value                 = SourceRow.Cells(1, EntryBookListColumn.Region).Value
-        .Cells(1, EntryListColumn.BirthDate).Value              = CDate(SourceRow.Cells(1, EntryBookListColumn.BirthDate).Value)
+        
         .Cells(1, EntryListColumn.EntryEvent).Value             = SourceRow.Cells(1, EntryBookListColumn.EntryEvent).Value
         .Cells(1, EntryListColumn.Record).Value                 = "'" & SourceRow.Cells(1, EntryBookListColumn.Record).Value
         .Cells(1, EntryListColumn.Comment).Value                = SourceRow.Cells(1, EntryBookListColumn.Comment).Value
-        .Cells(1, EntryListColumn.Fee).Value                    = CDec(SourceRow.Cells(1, EntryBookListColumn.Fee).Value)
         .Cells(1, EntryListColumn.EntryEventId).Value           = SourceRow.Cells(1, EntryBookListColumn.EntryEventId).Value
         .Cells(1, EntryListColumn.EntryEventType).Value         = SourceRow.Cells(1, EntryBookListColumn.EntryEventType).Value
         .Cells(1, EntryListColumn.EntryEventComment).Value      = SourceRow.Cells(1, EntryBookListColumn.EntryEventComment).Value
         .Cells(1, EntryListColumn.EntryRecordOrder).Value       = SourceRow.Cells(1, EntryBookListColumn.EntryRecordOrder).Value
+
+        ' データ変換の必要がある列の処理
+        ' 生年月日列は、申込書の仕様上、日付型で入力されることが想定されているが、
+        ' Excelの仕様上、日付型で入力されていない場合もあるため、日付型に変換してから設定する.
+        If IsDate(SourceRow.Cells(1, EntryBookListColumn.BirthDate).Value) Then
+            .Cells(1, EntryListColumn.BirthDate).Value = CDate(SourceRow.Cells(1, EntryBookListColumn.BirthDate).Value)
+            .Cells(1, EntryListColumn.BirthDate).NumberFormat = "yyyy/mm/dd"
+        Else
+            .Cells(1, EntryListColumn.BirthDate).Value = SourceRow.Cells(1, EntryBookListColumn.BirthDate).Value
+        End If
+
+        ' エントリー料金列は、申込書の仕様上、数値型で入力されることが想定されているが、
+        ' Excelの仕様上、数値型で入力されていない場合もあるため、数値型に変換してから設定する.
+        If IsNumeric(SourceRow.Cells(1, EntryBookListColumn.Fee).Value) Then
+            .Cells(1, EntryListColumn.Fee).Value = CDec(SourceRow.Cells(1, EntryBookListColumn.Fee).Value)
+        Else
+            .Cells(1, EntryListColumn.Fee).Value = SourceRow.Cells(1, EntryBookListColumn.Fee).Value
+        End If
     End With
 
     WriteEntryToEntryListSheet = 1
