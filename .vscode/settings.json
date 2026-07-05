@@ -1,0 +1,16 @@
+{
+  "files.associations": {
+    "*.bas": "vb",
+    "*.cls": "vb",
+    "*.frm": "vb"
+  },
+  "editor.defaultFormatter": "threatcon.vba-formatter",
+  "editor.formatOnSave": true,
+  "[vb]": {
+    "files.encoding": "shiftjis",
+    "editor.indentSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": false
+  },
+  "languageServerVBA.maxNumberOfProblems": 120
+}

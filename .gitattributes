@@ -1,0 +1,8 @@
+# Text / EOL for VBA files
+*.bas working-tree-encoding=CP932 eol=crlf
+*.cls working-tree-encoding=CP932 eol=crlf
+*.frm working-tree-encoding=CP932 eol=crlf
+
+# Binary files
+*.xlsm binary
+*.frx binary
