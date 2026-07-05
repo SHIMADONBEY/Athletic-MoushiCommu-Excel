@@ -40,6 +40,8 @@ End Sub
 
 Public Sub ClickDown()
     If Not m_Initialized Then Exit Sub
+
+    Application.ScreenUpdating = True
     m_ButtonFront.Visible = False
     m_Clicked = True
 End Sub
@@ -47,6 +49,8 @@ End Sub
 Public Sub ClickUp()
     If Not m_Initialized Then Exit Sub
     If Not m_Clicked Then Exit Sub
+
+    Application.ScreenUpdating = True
     m_ButtonFront.Visible = True
     m_Clicked = False
 End Sub

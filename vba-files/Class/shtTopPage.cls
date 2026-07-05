@@ -19,14 +19,20 @@ Public Sub btnAggregateTeamClick()
 End Sub
 
 Public Sub btnAggregateEntryClick()
-    Dim vShapeButton As ShapeButton: Set vShapeButton = New ShapeButton
-    vShapeButton.Initialize "btnAggregateEntry_front", "btnAggregateEntry_back"
-    vShapeButton.ClickDown
-    Application.Wait Now + TimeValue("00:00:01")
+    On Error GoTo error_btnAggregateTeamClick
+        Dim vShapeButton As ShapeButton: Set vShapeButton = New ShapeButton
+        vShapeButton.Initialize "btnAggregateEntry_front", "btnAggregateEntry_back"
+        vShapeButton.ClickDown
+        Application.Wait Now + TimeValue("00:00:01")
 
-    Dim vEntryBooks As Collection: Set vEntryBooks = WorkbookPicker.Pick()
-    EntrySheetAggregateController.AggregateEntryList vEntryBooks
-
+        Application.ScreenUpdating = False
+        Dim vEntryBooks As Collection: Set vEntryBooks = WorkbookPicker.Pick()
+        EntrySheetAggregateController.AggregateEntryList vEntryBooks
+    On Error GoTo 0
+    GoTo finally_btnAggregateTeamClick
+error_btnAggregateTeamClick:
+    MsgBox "エラーが発生しました: " & Err.Description, vbCritical
+finally_btnAggregateTeamClick:
+    Application.ScreenUpdating = True
     vShapeButton.ClickUp
-
 End Sub
