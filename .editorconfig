@@ -11,9 +11,6 @@ end_of_line = crlf
 indent_style = space
 indent_size = 4
 
-[*.{xlsm,frx}]
-binary
-
 [*.json]
 indent_style = space
 indent_size = 2
