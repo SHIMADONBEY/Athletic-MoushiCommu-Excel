@@ -34,7 +34,6 @@ error_btnAggregateTeamClick:
     Application.ScreenUpdating = True
     MsgBox "エラーが発生しました: " & Err.Description, vbCritical
 finally_btnAggregateTeamClick:
-    MacroProcessorOperator.DeleteProcessor
-
     If Not vShapeButton Is Nothing Then vShapeButton.ClickUp
+    MacroProcessorOperator.DeleteProcessor
 End Sub
