@@ -125,6 +125,12 @@ Private Function ExtractEntriesFromEntryBook( _
     Dim wbEntryBook As Workbook
     Set wbEntryBook = Workbooks.Open(EntryBookFilePath, ReadOnly:=True)
 
+    If wbEntryBook Is Nothing Then
+        Debug.Print "申込書を開けません: " & EntryBookFilePath
+        ExtractEntriesFromEntryBook = 0
+        Exit Function
+    End If
+
     Dim wsTeamSheet As Worksheet
     On Error Resume Next
     Set wsTeamSheet = wbEntryBook.Worksheets(ENTRY_BOOK_TEAM_SHEET_NAME)
