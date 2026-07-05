@@ -41,7 +41,7 @@ End Sub
 Public Sub ClickDown()
     If Not m_Initialized Then Exit Sub
 
-    MacroProcessorOperator.GetProcessor().ToggleScreenUpdating
+    Application.ScreenUpdating = True
     m_ButtonFront.Visible = False
     m_Clicked = True
     MacroProcessorOperator.GetProcessor().ToggleScreenUpdating
@@ -51,7 +51,7 @@ Public Sub ClickUp()
     If Not m_Initialized Then Exit Sub
     If Not m_Clicked Then Exit Sub
 
-    MacroProcessorOperator.GetProcessor().ToggleScreenUpdating
+    Application.ScreenUpdating = True
     m_ButtonFront.Visible = True
     m_Clicked = False
     MacroProcessorOperator.GetProcessor().ToggleScreenUpdating

@@ -31,10 +31,10 @@ Public Sub btnAggregateEntryClick()
     On Error GoTo 0
     GoTo finally_btnAggregateTeamClick
 error_btnAggregateTeamClick:
-    MacroProcessorOperator.GetProcessor().ToggleScreenUpdating
+    Application.ScreenUpdating = True
     MsgBox "エラーが発生しました: " & Err.Description, vbCritical
 finally_btnAggregateTeamClick:
     MacroProcessorOperator.DeleteProcessor
-    Application.ScreenUpdating = True
-    vShapeButton.ClickUp
+
+    If Not vShapeButton Is Nothing Then vShapeButton.ClickUp
 End Sub
