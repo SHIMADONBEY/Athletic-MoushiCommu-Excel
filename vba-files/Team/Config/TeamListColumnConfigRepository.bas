@@ -5,12 +5,21 @@ Option Private Module
 
 Public Function ReadAll() As Collection
     Dim vRows As Collection: Set vRows = New Collection
+    Dim vShtConfigIndices As Dictionary: Set vShtConfigIndices = New Dictionary
     
     Dim rRecordRow As Range
     For Each rRecordRow In shtConfiguration.ListObjects("tblFields").DataBodyRange.Rows
         Dim vRecord As TeamListColumnConfiguration: Set vRecord = ReadRecord(rRecordRow)
         If Not vRecord Is Nothing Then
-            vRows.Add vRecord, vRecord.Title
+            Dim vCollectionIndex As String: vCollectionIndex = vRecord.Title
+            If vShtConfigIndices.Exists(vCollectionIndex) Then
+                Debug.Print "列名が重複しています。列名：" & vCollectionIndex & " 行番号：" & rRecordRow.Row
+                vShtConfigIndices(vCollectionIndex) = vShtConfigIndices(vCollectionIndex) + 1
+                vRows.Add vRecord, vCollectionIndex & "_" & vShtConfigIndices(vCollectionIndex)
+            Else
+                vShtConfigIndices.Add vCollectionIndex, 0
+                vRows.Add vRecord, vCollectionIndex
+            End If
         End If
     Next rRecordRow
     
