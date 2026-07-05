@@ -9,7 +9,7 @@ Private m_Processor As MacroProcessor
 
 ' NOTE: この関数は、マクロプロセッサのインスタンスを取得するためのものです。
 '       マクロの登録や実行できないようにするため、ダミー引数を追加しています。
-Public Function GetProcessor(Optional ByVal Switch As Boolean = True) As MacroProcessor
+Public Function GetProcessor(Optional ByVal DummyFlag As Boolean = True) As MacroProcessor
     If m_Processor Is Nothing Then
         Set m_Processor = New MacroProcessor
     End If
@@ -18,7 +18,7 @@ End Function
 
 ' NOTE: このサブルーチンは、マクロプロセッサのインスタンスを削除するためのものです。
 '       マクロの登録や実行できないようにするため、ダミー引数を追加しています。
-Public Sub DeleteProcessor(Optional ByVal Switch As Boolean = True)
+Public Sub DeleteProcessor(Optional ByVal DummyFlag As Boolean = True)
     Set m_Processor = Nothing
 End Sub
 
