@@ -20,6 +20,7 @@ Public Sub btnAggregateTeamClick()
         Dim vEntryBooks As Collection: Set vEntryBooks = WorkbookPicker.Pick()
         TeamAggregateController.AggeregateTeamList vEntryBooks
     On Error GoTo 0
+    GoTo finally_btnAggregateTeamClick
 error_btnAggregateTeamClick:
     Application.ScreenUpdating = True
     MsgBox "エラーが発生しました: " & Err.Description, vbCritical
@@ -29,7 +30,7 @@ finally_btnAggregateTeamClick:
 End Sub
 
 Public Sub btnAggregateEntryClick()
-    On Error GoTo error_btnAggregateTeamClick
+    On Error GoTo error_btnAggregateEntryClick
         MacroProcessorOperator.GetProcessor().StartProcessing
         Dim vShapeButton As ShapeButton: Set vShapeButton = New ShapeButton
         vShapeButton.Initialize "btnAggregateEntry_front", "btnAggregateEntry_back"
@@ -39,11 +40,11 @@ Public Sub btnAggregateEntryClick()
         Dim vEntryBooks As Collection: Set vEntryBooks = WorkbookPicker.Pick()
         EntrySheetAggregateController.AggregateEntryList vEntryBooks
     On Error GoTo 0
-    GoTo finally_btnAggregateTeamClick
-error_btnAggregateTeamClick:
+    GoTo finally_btnAggregateEntryClick
+error_btnAggregateEntryClick:
     Application.ScreenUpdating = True
     MsgBox "エラーが発生しました: " & Err.Description, vbCritical
-finally_btnAggregateTeamClick:
+finally_btnAggregateEntryClick:
     If Not vShapeButton Is Nothing Then vShapeButton.ClickUp
     MacroProcessorOperator.DeleteProcessor
 End Sub
