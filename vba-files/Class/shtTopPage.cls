@@ -12,6 +12,7 @@ Option Explicit
 
 Public Sub btnAggregateTeamClick()
     On Error GoTo error_btnAggregateTeamClick
+        MacroProcessorOperator.GetProcessor().StartProcessing
         Dim vShapeButton As ShapeButton: Set vShapeButton = New ShapeButton
         vShapeButton.Initialize "btnAggregateTeam_front", "btnAggregateTeam_back"
         vShapeButton.ClickDown
