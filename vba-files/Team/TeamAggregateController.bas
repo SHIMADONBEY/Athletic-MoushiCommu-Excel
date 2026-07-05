@@ -5,7 +5,7 @@ Option Private Module
 
 Private Const ENTRY_BOOK_TEAM_SHEET_NAME As String = "(1)鑑"
 
-Public Sub AggeregateTeamList(ByVal EntryBookFiles As Collection)
+Public Sub AggregateTeamList(ByVal EntryBookFiles As Collection)
     If EntryBookFiles.Count = 0 Then
         MsgBox "申込が選択されていません。", vbExclamation
         Exit Sub

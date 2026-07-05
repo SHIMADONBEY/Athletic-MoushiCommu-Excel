@@ -18,7 +18,7 @@ Public Sub btnAggregateTeamClick()
         Application.Wait Now + TimeValue("00:00:01")
 
         Dim vEntryBooks As Collection: Set vEntryBooks = WorkbookPicker.Pick()
-        TeamAggregateController.AggeregateTeamList vEntryBooks
+        TeamAggregateController.AggregateTeamList vEntryBooks
     On Error GoTo 0
     GoTo finally_btnAggregateTeamClick
 error_btnAggregateTeamClick:
