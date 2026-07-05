@@ -11,11 +11,21 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Public Sub btnAggregateTeamClick()
-    Dim vShapeButton As ShapeButton: Set vShapeButton = New ShapeButton
-    vShapeButton.Initialize "btnAggregateTeam_front", "btnAggregateTeam_back"
-    vShapeButton.ClickDown
-    Application.Wait Now + TimeValue("00:00:02")
-    vShapeButton.ClickUp
+    On Error GoTo error_btnAggregateTeamClick
+        Dim vShapeButton As ShapeButton: Set vShapeButton = New ShapeButton
+        vShapeButton.Initialize "btnAggregateTeam_front", "btnAggregateTeam_back"
+        vShapeButton.ClickDown
+        Application.Wait Now + TimeValue("00:00:01")
+
+        Dim vEntryBooks As Collection: Set vEntryBooks = WorkbookPicker.Pick()
+        TeamAggregateController.AggeregateTeamList vEntryBooks
+    On Error GoTo 0
+error_btnAggregateTeamClick:
+    Application.ScreenUpdating = True
+    MsgBox "エラーが発生しました: " & Err.Description, vbCritical
+finally_btnAggregateTeamClick:
+    If Not vShapeButton Is Nothing Then vShapeButton.ClickUp
+    MacroProcessorOperator.DeleteProcessor
 End Sub
 
 Public Sub btnAggregateEntryClick()
