@@ -139,6 +139,7 @@ Private Function ExtractEntriesFromEntryBook( _
 
     Dim vTeamNameFull As String: vTeamNameFull = wbEntryBook.Worksheets(ENTRY_BOOK_TEAM_SHEET_NAME).Range("E5").Value
     Dim vTeamNameShort As String: vTeamNameShort = wbEntryBook.Worksheets(ENTRY_BOOK_TEAM_SHEET_NAME).Range("E6").Value
+    Dim vEntryCount As Dictionary: Set vEntryCount = New Dictionary
 
     Dim vWroteRowCount As Long
     Dim vCurrentRow As Long: vCurrentRow = StartRow
@@ -152,9 +153,17 @@ Private Function ExtractEntriesFromEntryBook( _
         vWrote = WriteEntryToEntryListSheet(EntryListSheet, vCurrentRow, rCursorRow)
         vWroteRowCount = vWroteRowCount + vWrote
         If vWrote > 0 Then
+            Dim vAthleteIndex As String: vAthleteIndex = Trim(rCursorRow.Cells(1, EntryBookListColumn.AthleteIndex).Value)
+            If Not vEntryCount.Exists(vAthleteIndex) Then
+                vEntryCount.Add vAthleteIndex, 0
+            End If
+
+            vEntryCount(vAthleteIndex) = vEntryCount(vAthleteIndex) + 1
+            
             EntryListSheet.Cells(vCurrentRow, EntryListColumn.SourceFilePath).Value = EntryBookFilePath
             EntryListSheet.Cells(vCurrentRow, EntryListColumn.TeamNameFull).Value = vTeamNameFull
             EntryListSheet.Cells(vCurrentRow, EntryListColumn.TeamNameShort).Value = vTeamNameShort
+            EntryListSheet.Cells(vCurrentRow, EntryListColumn.EntryCount).Value = vEntryCount(vAthleteIndex)
 
             vCurrentRow = vCurrentRow + vWrote
         End If
