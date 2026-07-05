@@ -22,7 +22,12 @@ Public Sub AggregateTeamList(ByVal EntryBookFiles As Collection)
     Dim vFilePath As Variant
     For Each vFilePath In EntryBookFiles
         Dim vExtractedCount As Long: vExtractedCount = ExtractTeamsFromEntryBook(vFilePath, wsTeamList, vCurrentRow, vColumnList)
-        wsTeamList.Cells(vCurrentRow, 1).Value = vFilePath
+
+        If vExtractedCount > 0 Then
+            Debug.Print "申込書からチーム情報を抽出しました: " & vFilePath
+            wsTeamList.Cells(vCurrentRow, 1).Value = vFilePath
+        End If
+
         vCurrentRow = vCurrentRow + vExtractedCount
     Next vFilePath
 End Sub
