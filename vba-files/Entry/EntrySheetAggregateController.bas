@@ -161,8 +161,11 @@ Private Function ExtractEntriesFromEntryBook( _
             vEntryCount(vAthleteIndex) = vEntryCount(vAthleteIndex) + 1
             
             EntryListSheet.Cells(vCurrentRow, EntryListColumn.SourceFilePath).Value = EntryBookFilePath
+            ' TODO: チーム名の正式名称と略称を取得する参照先をハードコーディングではなく、設定シートから取得するように変更する.
+            '       別Issueで対応する.
             EntryListSheet.Cells(vCurrentRow, EntryListColumn.TeamNameFull).Value = vTeamNameFull
             EntryListSheet.Cells(vCurrentRow, EntryListColumn.TeamNameShort).Value = vTeamNameShort
+
             EntryListSheet.Cells(vCurrentRow, EntryListColumn.EntryCount).Value = vEntryCount(vAthleteIndex)
 
             vCurrentRow = vCurrentRow + vWrote
@@ -196,6 +199,10 @@ Private Function WriteEntryToEntryListSheet( _
         .Cells(1, EntryListColumn.AthletePhonetic).Value        = SourceRow.Cells(1, EntryBookListColumn.AthletePhonetic).Value
         .Cells(1, EntryListColumn.Age).Value                    = "'" & SourceRow.Cells(1, EntryBookListColumn.Age).Value
         .Cells(1, EntryListColumn.TeamName).Value               = SourceRow.Cells(1, EntryBookListColumn.TeamName).Value
+
+        ' TODO: 所属カナの列は、申込書の仕様上、未実装の列のため、空文字を設定する. 別Issueで対応する.
+        .Cells(1, EntryListColumn.TeamPhonetic).Value           = ""
+
         .Cells(1, EntryListColumn.Region).Value                 = SourceRow.Cells(1, EntryBookListColumn.Region).Value
         .Cells(1, EntryListColumn.BirthDate).Value              = CDate(SourceRow.Cells(1, EntryBookListColumn.BirthDate).Value)
         .Cells(1, EntryListColumn.EntryEvent).Value             = SourceRow.Cells(1, EntryBookListColumn.EntryEvent).Value
