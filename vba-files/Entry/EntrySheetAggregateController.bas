@@ -123,21 +123,10 @@ Private Function ExtractEntriesFromEntryBook( _
 ) As Long
 
     Dim wbEntryBook As Workbook
-    Dim openErrorNumber As Long
-    Dim openErrorDescription As String
-    On Error Resume Next
-    Err.Clear
     Set wbEntryBook = Workbooks.Open(EntryBookFilePath, ReadOnly:=True)
-    openErrorNumber = Err.Number
-    openErrorDescription = Err.Description
-    On Error GoTo 0
 
     If wbEntryBook Is Nothing Then
-        If openErrorNumber <> 0 Then
-            Debug.Print "申込書を開けません: " & EntryBookFilePath & " / Error " & openErrorNumber & ": " & openErrorDescription
-        Else
-            Debug.Print "申込書を開けません: " & EntryBookFilePath
-        End If
+        Debug.Print "申込書を開けません: " & EntryBookFilePath
         ExtractEntriesFromEntryBook = 0
         Exit Function
     End If
