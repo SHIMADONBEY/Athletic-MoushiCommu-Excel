@@ -8,7 +8,14 @@ Public Function ReadAll() As Collection
     Dim vShtConfigIndices As Dictionary: Set vShtConfigIndices = New Dictionary
     
     Dim rRecordRow As Range
-    For Each rRecordRow In shtConfiguration.ListObjects("tblFields").DataBodyRange.Rows
+    Dim rConfigurationRecords As Range: Set rConfigurationRecords = shtConfiguration.ListObjects("tblFields").DataBodyRange
+
+    If rConfigurationRecords Is Nothing Then
+        Set ReadAll = vRows
+        Exit Function
+    End If
+
+    For Each rRecordRow In rConfigurationRecords.Rows
         Dim vRecord As TeamListColumnConfiguration: Set vRecord = ReadRecord(rRecordRow)
         If Not vRecord Is Nothing Then
             Dim vCollectionIndex As String: vCollectionIndex = vRecord.Title
