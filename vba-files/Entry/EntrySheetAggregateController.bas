@@ -197,8 +197,8 @@ Private Function WriteEntryToEntryListSheet( _
         ByVal SourceRow As Range _
 ) As Long
 
-    Dim vEntryIndex As String: vEntryIndex = Trim(SourceRow.Cells(1, EntryBookListColumn.AthleteIndex).Value)
-    If vEntryIndex = "" Then
+    Dim vAthleteIndex As String: vAthleteIndex = Trim(SourceRow.Cells(1, EntryBookListColumn.AthleteIndex).Value)
+    If vAthleteIndex = "" Then
         WriteEntryToEntryListSheet = 0
         Exit Function
     End If
