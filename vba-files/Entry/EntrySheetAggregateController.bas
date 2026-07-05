@@ -123,7 +123,10 @@ Private Function ExtractEntriesFromEntryBook( _
 ) As Long
 
     Dim wbEntryBook As Workbook
+
+    On Error Resume Next
     Set wbEntryBook = Workbooks.Open(EntryBookFilePath, ReadOnly:=True)
+    On Error GoTo 0
 
     If wbEntryBook Is Nothing Then
         Debug.Print "申込書を開けません: " & EntryBookFilePath
