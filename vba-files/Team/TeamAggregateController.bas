@@ -14,7 +14,7 @@ Public Sub AggeregateTeamList(ByVal EntryBookFiles As Collection)
     Dim wsTeamList As Worksheet
     Set wsTeamList = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count))
     
-    Dim vColumnList As Collection: Set vColumnList = TeamListColumnConfigurationRepository.ReadAll()
+    Dim vColumnList As Collection: Set vColumnList = TeamListColumnConfigRepository.ReadAll()
 
     InitializeTeamListSheet wsTeamList, vColumnList
 
@@ -22,6 +22,7 @@ Public Sub AggeregateTeamList(ByVal EntryBookFiles As Collection)
     Dim vFilePath As Variant
     For Each vFilePath In EntryBookFiles
         Dim vExtractedCount As Long: vExtractedCount = ExtractTeamsFromEntryBook(vFilePath, wsTeamList, vCurrentRow, vColumnList)
+        wsTeamList.Cells(vCurrentRow, 1).Value = vFilePath
         vCurrentRow = vCurrentRow + vExtractedCount
     Next vFilePath
 End Sub
@@ -84,7 +85,7 @@ Private Function ExtractTeamsFromEntryBook( _
     Dim vColumnIndex As Long: vColumnIndex = 2
     For Each vColumnConfig In ColumnList
         Dim vCellValue As Variant
-        vCellValue = wsTeamSheet.Range(vColumnConfig.CellAddress).Value
+        vCellValue = wsTeamSheet.Range(vColumnConfig.Address).Value
 
         Select Case vColumnConfig.DataType
         Case "文字列"
@@ -117,6 +118,8 @@ Private Function ExtractTeamsFromEntryBook( _
         End Select
         vColumnIndex = vColumnIndex + 1
     Next vColumnConfig
+
+    wbEntryBook.Close SaveChanges:=False
 
     ExtractTeamsFromEntryBook = 1
 End Function

@@ -7,9 +7,8 @@ Public Function ReadAll() As Collection
     Dim vRows As Collection: Set vRows = New Collection
     
     Dim rRecordRow As Range
-    For Each rRecordRow In shtConfiguration.Range("tblFields").ListRows
-        Dim vRecord As TeamListColumnConfiguration
-        Set vRecord = ReadRecord(rRecordRow)
+    For Each rRecordRow In shtConfiguration.ListObjects("tblFields").DataBodyRange.Rows
+        Dim vRecord As TeamListColumnConfiguration: Set vRecord = ReadRecord(rRecordRow)
         If Not vRecord Is Nothing Then
             vRows.Add vRecord, vRecord.Title
         End If
