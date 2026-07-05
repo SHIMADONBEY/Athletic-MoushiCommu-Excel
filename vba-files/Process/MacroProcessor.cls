@@ -41,14 +41,14 @@ Public Sub RestoreState()
 End Sub
 
 Public Property Get ScreenUpdatingState() As Boolean
-    ScreenUpdatingState = Application.ScreenUpdating
+    ScreenUpdatingState = m_ScreenUpdatingState
 End Property
 
 Public Property Get CalculationState() As XlCalculation
-    CalculationState = Application.Calculation
+    CalculationState = m_CalculationState
 End Property
 
 Public Property Get EnableEventsState() As Boolean
-    EnableEventsState = Application.EnableEvents
+    EnableEventsState = m_EnableEventsState
 End Property
 
