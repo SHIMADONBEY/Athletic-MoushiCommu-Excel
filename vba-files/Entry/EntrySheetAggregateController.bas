@@ -132,8 +132,10 @@ Private Function ExtractEntriesFromEntryBook( _
     End If
 
     Dim wsTeamSheet As Worksheet
+    Dim wsEntryListSheet As Worksheet
     On Error Resume Next
     Set wsTeamSheet = wbEntryBook.Worksheets(ENTRY_BOOK_TEAM_SHEET_NAME)
+    Set wsEntryListSheet = wbEntryBook.Worksheets(ENTRY_BOOK_LIST_SHEET_NAME)
     On Error GoTo 0
 
     If wsTeamSheet Is Nothing Then
@@ -141,10 +143,15 @@ Private Function ExtractEntriesFromEntryBook( _
         wbEntryBook.Close SaveChanges:=False
         ExtractEntriesFromEntryBook = 0
         Exit Function
+    ElseIf wsEntryListSheet Is Nothing Then
+        Debug.Print "エントリーリストシートが見つかりません: " & EntryBookFilePath
+        wbEntryBook.Close SaveChanges:=False
+        ExtractEntriesFromEntryBook = 0
+        Exit Function
     End If
 
-    Dim vTeamNameFull As String: vTeamNameFull = wbEntryBook.Worksheets(ENTRY_BOOK_TEAM_SHEET_NAME).Range("E5").Value
-    Dim vTeamNameShort As String: vTeamNameShort = wbEntryBook.Worksheets(ENTRY_BOOK_TEAM_SHEET_NAME).Range("E6").Value
+    Dim vTeamNameFull As String: vTeamNameFull = wsTeamSheet.Range("E5").Value
+    Dim vTeamNameShort As String: vTeamNameShort = wsTeamSheet.Range("E6").Value
     Dim vEntryCount As Dictionary: Set vEntryCount = New Dictionary
 
     Dim vWroteRowCount As Long
@@ -153,7 +160,7 @@ Private Function ExtractEntriesFromEntryBook( _
 
     For vCursorRow = ENTRY_BOOK_LIST_TOP_ROW To ENTRY_BOOK_LIST_TOP_ROW + MAX_ENTRIES_PER_BOOK - 1
         Dim rCursorRow As Range
-        Set rCursorRow = wbEntryBook.Worksheets(ENTRY_BOOK_LIST_SHEET_NAME).Cells(vCursorRow, 1).Resize(1, EntryBookListColumn.LastColumn)
+        Set rCursorRow = wsEntryListSheet.Cells(vCursorRow, 1).Resize(1, EntryBookListColumn.LastColumn)
     
         Dim vWrote As Long
         vWrote = WriteEntryToEntryListSheet(EntryListSheet, vCurrentRow, rCursorRow)
