@@ -8,16 +8,22 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 
-Private m_MacroProcessor As MacroProcessor
+Option Explicit
 
 Private Sub Workbook_Open()
-    Set m_MacroProcessor = New MacroProcessor
+    shtInternalRegistory.Cells(1, 2).Value = Now
+    shtInternalRegistory.Cells(2, 2).Value = Application.ScreenUpdating
+    shtInternalRegistory.Cells(3, 2).Value = Application.Calculation
+    shtInternalRegistory.Cells(4, 2).Value = Application.EnableEvents
 End Sub
 
 Private Sub Workbook_BeforeClose(Cancel As Boolean)
-    Set m_MacroProcessor = Nothing
-End Sub
+    Application.ScreenUpdating = shtInternalRegistory.Cells(2, 2).Value
+    Application.Calculation = shtInternalRegistory.Cells(3, 2).Value
+    Application.EnableEvents = shtInternalRegistory.Cells(4, 2).Value
 
-Public Function GetMacroProcessor() As MacroProcessor
-    Set GetMacroProcessor = m_MacroProcessor
-End Function
+    shtInternalRegistory.Cells(1, 2).ClearContents
+    shtInternalRegistory.Cells(2, 2).ClearContents
+    shtInternalRegistory.Cells(3, 2).ClearContents
+    shtInternalRegistory.Cells(4, 2).ClearContents
+End Sub

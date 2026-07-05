@@ -25,5 +25,7 @@ End Sub
 ' NOTE: このサブルーチンは、マクロプロセッサの状態をリセットするためのものです。
 '       緊急時に備え、`ResetProcessor` メソッドを呼び出すことで、マクロプロセッサの状態を初期化できます。
 Public Sub ResetProcessor()
-    ThisWorkbook.GetMacroProcessor.RestoreState
+    Application.ScreenUpdating = shtInternalRegistory.Cells(2, 2).Value
+    Application.Calculation = shtInternalRegistory.Cells(3, 2).Value
+    Application.EnableEvents = shtInternalRegistory.Cells(4, 2).Value
 End Sub
