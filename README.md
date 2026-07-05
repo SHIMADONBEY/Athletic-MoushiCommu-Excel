@@ -29,4 +29,4 @@
 
 [@Shimadonbey](https://github.com/SHIMADONBEY)
 
-[https://github.com/SHIMADONBEY/Athletic-MoushiCommu-Excel]
+[Athletic-MoushiCommu-Excel リポジトリ](https://github.com/SHIMADONBEY/Athletic-MoushiCommu-Excel)
