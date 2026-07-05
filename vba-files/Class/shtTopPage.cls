@@ -12,8 +12,21 @@ Option Explicit
 
 Public Sub btnAggregateTeamClick()
     Dim vShapeButton As ShapeButton: Set vShapeButton = New ShapeButton
-    vShapeButton.Initialize "btnAggregateTeam_Front", "btnAggregateTeam_Back"
+    vShapeButton.Initialize "btnAggregateTeam_front", "btnAggregateTeam_back"
     vShapeButton.ClickDown
     Application.Wait Now + TimeValue("00:00:02")
     vShapeButton.ClickUp
+End Sub
+
+Public Sub btnAggregateEntryClick()
+    Dim vShapeButton As ShapeButton: Set vShapeButton = New ShapeButton
+    vShapeButton.Initialize "btnAggregateEntry_front", "btnAggregateEntry_back"
+    vShapeButton.ClickDown
+    Application.Wait Now + TimeValue("00:00:01")
+
+    Dim vEntryBooks As Collection: Set vEntryBooks = WorkbookPicker.Pick()
+    EntrySheetAggregateController.AggregateEntryList vEntryBooks
+
+    vShapeButton.ClickUp
+
 End Sub
