@@ -60,7 +60,7 @@ End Sub
 Private Function ExtractTeamsFromEntryBook( _
         ByVal EntryBookFilePath As String, _
         ByVal TeamListSheet As Worksheet, _
-        ByRef CurrentRow As Long, _
+        ByVal CurrentRow As Long, _
         ByVal ColumnList As Collection _
 ) As Long
     Dim wbEntryBook As Workbook
