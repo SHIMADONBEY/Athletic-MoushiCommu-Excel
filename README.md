@@ -25,7 +25,7 @@
 
 [LICENSE](LICENSE)を参照してください。
 
-## このライブラリに対するお問い合わせ
+## お問い合わせ
 
 [@Shimadonbey](https://github.com/SHIMADONBEY)
 
