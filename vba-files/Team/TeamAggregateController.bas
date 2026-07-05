@@ -77,6 +77,7 @@ Private Function ExtractTeamsFromEntryBook( _
 
     If wsTeamSheet Is Nothing Then
         Debug.Print "チームシートが見つかりません: " & EntryBookFilePath
+        wbEntryBook.Close SaveChanges:=False
         ExtractTeamsFromEntryBook = 0
         Exit Function
     End If
