@@ -1,4 +1,4 @@
-Attribute VB_Name = "TeamListColumnConfigurationRepository"
+Attribute VB_Name = "TeamListColumnConfigRepository"
 'namespace=vba-files/Team/Config
 Option Explicit
 Option Private Module

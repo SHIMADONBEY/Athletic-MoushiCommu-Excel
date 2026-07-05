@@ -12,7 +12,7 @@ Option Explicit
 
 Private m_ColumnOrder As Long
 Private m_Title As String
-Private m_Address As As String
+Private m_Address As String
 Private m_DataType As String
 
 Private m_Initialized As Boolean
