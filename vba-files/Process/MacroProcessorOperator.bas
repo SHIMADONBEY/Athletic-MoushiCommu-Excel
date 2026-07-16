@@ -27,11 +27,15 @@ End Sub
 Public Sub ResetProcessor()
     If IsEmpty(shtInternalRegistry.Cells(2, 2).Value) Then
         Application.ScreenUpdating = True
-    Else 
+    ElseIf Not VarType(shtInternalRegistry.Cells(2, 2).Value) = vbBoolean Then
+        Application.ScreenUpdating = True
+    Else
         Application.ScreenUpdating = CBool(shtInternalRegistry.Cells(2, 2).Value)
     End If
 
     If IsEmpty(shtInternalRegistry.Cells(4, 2).Value) Then
+        Application.EnableEvents = True
+    ElseIf Not VarType(shtInternalRegistry.Cells(4, 2).Value) = vbBoolean Then
         Application.EnableEvents = True
     Else 
         Application.EnableEvents = CBool(shtInternalRegistry.Cells(4, 2).Value)
