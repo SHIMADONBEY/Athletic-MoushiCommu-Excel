@@ -41,6 +41,7 @@ Private Enum EntryBookListColumn
     AthletePhonetic
     Age
     TeamName
+    TeamPhonetic
     Region
     BirthDate
     EntryEvent
@@ -215,10 +216,7 @@ Private Function WriteEntryToEntryListSheet( _
         .Cells(1, EntryListColumn.AthletePhonetic).Value        = SourceRow.Cells(1, EntryBookListColumn.AthletePhonetic).Value
         .Cells(1, EntryListColumn.Age).Value                    = "'" & SourceRow.Cells(1, EntryBookListColumn.Age).Value
         .Cells(1, EntryListColumn.TeamName).Value               = SourceRow.Cells(1, EntryBookListColumn.TeamName).Value
-
-        ' TODO: 所属カナの列は、申込書の仕様上、未実装の列のため、空文字を設定する. 別Issueで対応する.
-        .Cells(1, EntryListColumn.TeamPhonetic).Value           = ""
-
+        .Cells(1, EntryListColumn.TeamPhonetic).Value           = SourceRow.Cells(1, EntryBookListColumn.TeamPhonetic).Value
         .Cells(1, EntryListColumn.Region).Value                 = SourceRow.Cells(1, EntryBookListColumn.Region).Value
         
         .Cells(1, EntryListColumn.EntryEvent).Value             = SourceRow.Cells(1, EntryBookListColumn.EntryEvent).Value
