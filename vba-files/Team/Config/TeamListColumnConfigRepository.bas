@@ -7,7 +7,9 @@ Public Function ReadAll() As Collection
     Dim vRows As Collection: Set vRows = New Collection
     Dim vShtConfigIndices As Dictionary: Set vShtConfigIndices = New Dictionary
     
+    On Error Resume Next
     Dim lsoConfig As ListObject: Set lsoConfig = shtConfiguration.ListObjects("tblFields")
+    On Error GoTo 0
 
     If lsoConfig Is Nothing Then
         Set ReadAll = vRows
