@@ -25,17 +25,17 @@ End Sub
 ' NOTE: このサブルーチンは、マクロプロセッサの状態をリセットするためのものです。
 '       緊急時に備え、`ResetProcessor` メソッドを呼び出すことで、マクロプロセッサの状態を初期化できます。
 Public Sub ResetProcessor()
-    If IsEmpty(shtInternalRegistory.Cells(2, 2).Value) Then
+    If IsEmpty(shtInternalRegistry.Cells(2, 2).Value) Then
         Application.ScreenUpdating = True
     Else 
-        Application.ScreenUpdating = CBool(shtInternalRegistory.Cells(2, 2).Value)
+        Application.ScreenUpdating = CBool(shtInternalRegistry.Cells(2, 2).Value)
     End If
 
-    If IsEmpty(shtInternalRegistory.Cells(4, 2).Value) Then
+    If IsEmpty(shtInternalRegistry.Cells(4, 2).Value) Then
         Application.EnableEvents = True
     Else 
-        Application.EnableEvents = CBool(shtInternalRegistory.Cells(4, 2).Value)
+        Application.EnableEvents = CBool(shtInternalRegistry.Cells(4, 2).Value)
     End If
 
-    Application.Calculation = shtInternalRegistory.Cells(3, 2).Value
+    Application.Calculation = shtInternalRegistry.Cells(3, 2).Value
 End Sub
