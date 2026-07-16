@@ -41,6 +41,7 @@ Private Enum EntryBookListColumn
     AthletePhonetic
     Age
     TeamName
+    TeamPhonetic
     Region
     BirthDate
     EntryEvent
@@ -125,7 +126,7 @@ Private Function ExtractEntriesFromEntryBook( _
     Dim wbEntryBook As Workbook
 
     On Error Resume Next
-    Set wbEntryBook = Workbooks.Open(EntryBookFilePath, ReadOnly:=True)
+    Set wbEntryBook = Workbooks.Open(EntryBookFilePath, ReadOnly:=True, UpdateLinks:=False, AddToMru:=False)
     On Error GoTo 0
 
     If wbEntryBook Is Nothing Then
@@ -210,15 +211,12 @@ Private Function WriteEntryToEntryListSheet( _
         .Cells(1, EntryListColumn.AthleteIndex).Value           = SourceRow.Cells(1, EntryBookListColumn.AthleteIndex).Value
         .Cells(1, EntryListColumn.EntryIndex).Value             = SourceRow.Cells(1, EntryBookListColumn.EntryIndex).Value
         .Cells(1, EntryListColumn.Gender).Value                 = SourceRow.Cells(1, EntryBookListColumn.Gender).Value
-        .Cells(1, EntryListColumn.Bib).Value                    = "'" & SourceRow.Cells(1, EntryBookListColumn.Bib).Value
+        .Cells(1, EntryListColumn.Bib).Value                    = "'" & StrConv(SourceRow.Cells(1, EntryBookListColumn.Bib).Value, vbNarrow)
         .Cells(1, EntryListColumn.AthleteName).Value            = SourceRow.Cells(1, EntryBookListColumn.AthleteName).Value
-        .Cells(1, EntryListColumn.AthletePhonetic).Value        = SourceRow.Cells(1, EntryBookListColumn.AthletePhonetic).Value
+        .Cells(1, EntryListColumn.AthletePhonetic).Value        = StrConv(SourceRow.Cells(1, EntryBookListColumn.AthletePhonetic).Value, vbNarrow)
         .Cells(1, EntryListColumn.Age).Value                    = "'" & SourceRow.Cells(1, EntryBookListColumn.Age).Value
         .Cells(1, EntryListColumn.TeamName).Value               = SourceRow.Cells(1, EntryBookListColumn.TeamName).Value
-
-        ' TODO: 所属カナの列は、申込書の仕様上、未実装の列のため、空文字を設定する. 別Issueで対応する.
-        .Cells(1, EntryListColumn.TeamPhonetic).Value           = ""
-
+        .Cells(1, EntryListColumn.TeamPhonetic).Value           = StrConv(SourceRow.Cells(1, EntryBookListColumn.TeamPhonetic).Value, vbNarrow)
         .Cells(1, EntryListColumn.Region).Value                 = SourceRow.Cells(1, EntryBookListColumn.Region).Value
         
         .Cells(1, EntryListColumn.EntryEvent).Value             = SourceRow.Cells(1, EntryBookListColumn.EntryEvent).Value

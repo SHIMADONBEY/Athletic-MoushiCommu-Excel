@@ -25,7 +25,30 @@ End Sub
 ' NOTE: このサブルーチンは、マクロプロセッサの状態をリセットするためのものです。
 '       緊急時に備え、`ResetProcessor` メソッドを呼び出すことで、マクロプロセッサの状態を初期化できます。
 Public Sub ResetProcessor()
-    Application.ScreenUpdating = shtInternalRegistory.Cells(2, 2).Value
-    Application.Calculation = shtInternalRegistory.Cells(3, 2).Value
-    Application.EnableEvents = shtInternalRegistory.Cells(4, 2).Value
+    If IsEmpty(shtInternalRegistry.Cells(2, 2).Value) Then
+        Application.ScreenUpdating = True
+    ElseIf Not VarType(shtInternalRegistry.Cells(2, 2).Value) = vbBoolean Then
+        Application.ScreenUpdating = True
+    Else
+        Application.ScreenUpdating = CBool(shtInternalRegistry.Cells(2, 2).Value)
+    End If
+
+    If IsEmpty(shtInternalRegistry.Cells(4, 2).Value) Then
+        Application.EnableEvents = True
+    ElseIf Not VarType(shtInternalRegistry.Cells(4, 2).Value) = vbBoolean Then
+        Application.EnableEvents = True
+    Else 
+        Application.EnableEvents = CBool(shtInternalRegistry.Cells(4, 2).Value)
+    End If
+
+    Dim vCaluculationMode As Variant: vCaluculationMode = shtInternalRegistry.Cells(3, 2).Value
+
+    Select Case vCaluculationMode
+    Case xlCalculationAutomatic, xlCalculationManual, xlCalculationSemiautomatic
+        ' XlCalculation の定数値を使用して、計算モードを設定します。
+        Application.Calculation = CLng(vCaluculationMode)
+    Case Else
+        ' XlCalculation の定数値以外の場合は、デフォルトの自動計算モードに設定します。
+        Application.Calculation = xlCalculationAutomatic
+    End Select
 End Sub

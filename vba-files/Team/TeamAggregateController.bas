@@ -66,7 +66,7 @@ Private Function ExtractTeamsFromEntryBook( _
     Dim wbEntryBook As Workbook
     
     On Error Resume Next
-    Set wbEntryBook = Workbooks.Open(EntryBookFilePath, ReadOnly:=True)
+    Set wbEntryBook = Workbooks.Open(EntryBookFilePath, ReadOnly:=True, UpdateLinks:=False, AddToMru:=False)
     On Error GoTo 0
 
     If wbEntryBook Is Nothing Then
