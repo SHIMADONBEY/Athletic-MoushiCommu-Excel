@@ -41,5 +41,14 @@ Public Sub ResetProcessor()
         Application.EnableEvents = CBool(shtInternalRegistry.Cells(4, 2).Value)
     End If
 
-    Application.Calculation = shtInternalRegistry.Cells(3, 2).Value
+    Dim vCaluculationMode As Variant: vCaluculationMode = shtInternalRegistry.Cells(3, 2).Value
+
+    Select Case vCaluculationMode
+    Case xlCalculationAutomatic, xlCalculationManual, xlCalculationSemiautomatic
+        ' XlCalculation の定数値を使用して、計算モードを設定します。
+        Application.Calculation = CLng(vCaluculationMode)
+    Case Else
+        ' XlCalculation の定数値以外の場合は、デフォルトの自動計算モードに設定します。
+        Application.Calculation = xlCalculationAutomatic
+    End Select
 End Sub
